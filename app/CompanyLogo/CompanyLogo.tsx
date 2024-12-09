@@ -1,6 +1,6 @@
 export default function CompanyLogo() {
   return (
-    <div className="w-full max-w-[1920px] py-8 sm:py-16 px-4 sm:px-8 md:px-16 lg:px-[300px] bg-white">
+    <div className="w-full max-w-[1920px] py-8 sm:py-16 px-4 sm:px-8 md:px-16 lg:px-[300px]">
       <div className="flex flex-wrap justify-center sm:justify-between items-center gap-8 sm:gap-4">
         <img src="/logo1.png" alt="Company 1" className="h-8 sm:h-12" />
         <img src="/logo2.png" alt="Company 2" className="h-8 sm:h-12" />

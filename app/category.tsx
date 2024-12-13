@@ -1,65 +1,65 @@
 import React from 'react';
 import Image from 'next/image';
 
-// Define an interface for the category data
-interface Category {
+interface CategoryProps {
   image: string;
   name: string;
-  product: string;
+  productCount: string;
 }
 
 export default function Category() {
-  const Data: Category[] = [
+  const categories: CategoryProps[] = [
     {
       image: '/c1.png',
       name: 'Wing Chair',
-      product: '1334',
+      productCount: '3584',
     },
     {
       image: '/c2.png',
       name: 'Wooden Chair',
-      product: '23432',
+      productCount: '157',
     },
     {
       image: '/c3.png',
       name: 'Desk Chair',
-      product: '3232',
+      productCount: '154',
     },
   ];
 
   return (
     <div className="px-4 sm:px-8 md:px-48 py-8">
-      <div>
-        <h1 className="text-2xl font-bold mb-4 pl-4">Top Categories</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10">
-          {Data.map((val: Category, i: number) => (
-            <div
-              key={i}
-              className="group relative h-80 flex flex-col items-center rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
-            >
-              {/* Background Image */}
-              <div className="absolute inset-0 w-full h-full">
-                <Image
-                  src={val.image}
-                  alt={val.name}
-                  layout="fill" 
-                  objectFit="cover" 
-                  objectPosition="center" 
-                  className="rounded-lg"
-                />
-              </div>
+      <h1 className="text-2xl font-bold mb-6">Top Categories</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {categories.map((category, index) => (
+          <div
+            key={index}
+            className="relative group rounded-lg overflow-hidden shadow-md hover:shadow-xl transform transition duration-300"
+            style={{ height: '300px' }} // Ensuring container has a defined height
+          >
+            {/* Image Section */}
+            <Image
+              src={category.image}
+              alt={category.name}
+              layout="fill"
+              objectFit="cover"
+              className="w-full h-full object-cover"
+            />
 
-              {/* Overlay */}
-              <div className="absolute bottom-0 left-0 w-full h-1/4 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-opacity duration-300"></div>
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-70 transition-opacity duration-300"></div>
 
-              {/* Content */}
-              <div className="absolute bottom-0 left-0 w-full h-1/4 px-4 py-2 text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 overflow-hidden">
-                <h2 className="font-semibold text-base truncate">{val.name}</h2>
-                <span className="text-sm font-medium truncate">{val.product} products</span>
-              </div>
+            {/* Text Always Visible Under the Image */}
+            <div className="absolute bottom-4 left-4 z-10 text-white">
+              <h2 className="font-semibold text-lg">{category.name}</h2>
+              <p className="text-sm">{category.productCount} products</p>
             </div>
-          ))}
-        </div>
+
+            {/* Additional Click Hover Effect */}
+            <button className="absolute bottom-4 right-4 bg-sky-500 text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Explore
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

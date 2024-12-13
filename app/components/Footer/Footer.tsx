@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaPaypal, FaCcVisa, FaCcMastercard, FaCcAmex } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -176,9 +177,23 @@ export default function Footer() {
                 tincidunt erat enim.
               </p>
             </div>
-          </div>
-        </div>
+<div className="mt-4 flex justify-center space-x-4">
+<FaCcMastercard size={40} />
+<FaPaypal size={40} />
+<FaCcAmex size={40} />
+<FaCcVisa size={40} />
+</div>
+           </div>
+         </div>
       </div>
     </footer>
   );
-}
+ }
+
+
+
+
+
+
+
+

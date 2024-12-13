@@ -1,11 +1,16 @@
+'use client';
+import { useState } from "react";
+import Link from "next/link";
+
 export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="w-full max-w-[1920px] h-auto sm:h-[203px] bg-white">
       {/* Top Navbar Section */}
       <div className="w-full max-w-[1920px] h-auto sm:h-[45px] bg-[#272343] flex flex-col sm:flex-row justify-between px-4 sm:px-8 md:px-16 lg:px-[300px] py-2 sm:py-[14px]">
         {/* Left Section: Shipping */}
         <div className="flex items-center gap-2 opacity-70 mb-2 sm:mb-0">
-          {/* Tick Mark Icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4 text-white"
@@ -23,7 +28,7 @@ export default function Navbar() {
           </p>
         </div>
 
-        {/* Right Section: Help and Options */}
+        {/* Right Section */}
         <div className="flex items-center gap-4 sm:gap-6 opacity-70">
           {/* ENG Dropdown */}
           <div className="flex items-center gap-1">
@@ -41,105 +46,84 @@ export default function Navbar() {
               />
             </svg>
           </div>
-
-          {/* FAQs */}
           <p className="text-[13px] font-normal text-white">FAQs</p>
-
-          <div className="flex items-center gap-1">
-            {/* Circle Alert */}
-            <div className="flex items-center justify-center w-4 h-4 rounded-full border border-white opacity-70">
-              {/* Exclamation Mark */}
-              <span className="text-[10px] font-bold text-white">!</span>
-            </div>
-            <p className="text-[13px] font-normal text-white">Need Help</p>
-          </div>
         </div>
       </div>
 
       {/* Middle Navbar Section */}
-      <div className="w-full max-w-[1920px] h-auto sm:h-[84px] py-4 sm:py-[20px] px-4 sm:px-8 md:px-16 lg:px-[300px] flex flex-col sm:flex-row justify-between items-center bg-[#F0F2F3]">
-        {/* Left Section: Logo and Text */}
-        <div className="flex items-center gap-[8px] mb-4 sm:mb-0">
-          {/* Logo */}
+      <div className="w-full max-w-[1920px] h-auto sm:h-[84px] py-4 sm:py-[20px] px-4 sm:px-8 md:px-16 lg:px-[300px] flex justify-between items-center bg-[#F0F2F3]">
+        {/* Left Section */}
+        <div className="flex items-center gap-2">
           <img
             src="/Logo icon.svg"
-            alt="Comforty Logo"
+            alt="Logo"
             className="w-[40px] h-[40px]"
           />
-          {/* Text */}
-          <p className="text-[26px] font-medium leading-[31.2px] text-[#272343]">
-            Comforty
-          </p>
+          <p className="text-[26px] font-medium text-[#272343]">Comforty</p>
         </div>
-
-        {/* Right Section: User Link */}
-        <div className="flex items-center gap-[12px]">
-          {/* Cart Button */}
-          <div className="flex items-center gap-[8px] bg-[#FFFFFF] px-[16px] py-[11px] rounded-tl-[8px]">
-            {/* Buy Icon */}
-            <div className="w-[22px] h-[22px] flex items-center justify-center">
-              <img
-                src="/Buy 2.svg"
-                alt="Buy Icon"
-                className="w-[16.96px] h-[16.54px]"
-              />
-            </div>
-            {/* Cart Text */}
-            <span className="text-[12px] font-medium leading-[13.2px] text-[#272343]">
-              Cart
-            </span>
-            {/* Cart Badge */}
-            <div className="relative w-[20px] h-[20px] flex items-center justify-center bg-[#007580] rounded-full">
-              <span className="text-[10px] font-medium text-[#FFFFFF] leading-[10px]">
-                2
-              </span>
-            </div>
-          </div>
+        {/* Hamburger Menu */}
+        <div className="sm:hidden">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-[#272343] focus:outline-none"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </button>
         </div>
       </div>
 
-      {/* Links Navbar Section */}
-      <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 md:px-16 lg:px-[300px] py-4 sm:py-[14px] bg-[#FFFFFF] shadow-[0px_1px_0px_0px_#E1E3E5] w-full max-w-[100%]">
+      {/* Links Section */}
+      <div
+        className={`${
+          isMenuOpen ? "block" : "hidden"
+        } sm:flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 md:px-16 lg:px-[300px] py-4 sm:py-[14px] bg-[#FFFFFF] shadow-[0px_1px_0px_0px_#E1E3E5]`}
+      >
         {/* Left Links */}
-        <div className="flex flex-wrap justify-center sm:justify-start gap-4 sm:gap-[32px] mb-4 sm:mb-0">
-          <a
-            href="/"
-            className="text-[14px] font-medium leading-[15.4px] text-[#007580]"
-          >
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-[32px] mb-4 sm:mb-0">
+          <Link href="/" className="text-[14px] font-medium text-[#007580]">
             Home
-          </a>
-          <a
-            href="/shop"
-            className="text-[14px] font-medium leading-[15.4px] text-[#636270]"
-          >
+          </Link>
+          <Link href="/Shop" className="text-[14px] font-medium text-[#636270]">
             Shop
-          </a>
-          <a
-            href="/products"
-            className="text-[14px] font-medium leading-[15.4px] text-[#636270]"
-          >
-            Product
-          </a>
-          <a
-            href="/pages"
-            className="text-[14px] font-medium leading-[15.4px] text-[#636270]"
-          >
+          </Link >
+         
+          <Link  href="/Products" className="text-[14px] font-medium text-[#636270]">
+            Products
+          </Link >
+          <Link  href="/pages" className="text-[14px] font-medium text-[#636270]">
             Pages
-          </a>
-          <a
-            href="/about"
-            className="text-[14px] font-medium leading-[15.4px] text-[#636270]"
-          >
+          </Link >
+          <Link  href="/About" className="text-[14px] font-medium text-[#636270]">
             About
-          </a>
+          </Link >
+          <Link  href="/Cart" className="text-[14px] font-medium text-[#636270]">
+            Cart
+          </Link >
+          <Link  href="/FAQ" className="text-[14px] font-medium text-[#636270]">
+            FAQ
+          </Link >
+          <Link  href="/Contact" className="text-[14px] font-medium text-[#636270]">
+            Contact
+          </Link >
         </div>
 
-        {/* Right Contact */}
-        <div className="flex items-center gap-[8px]">
-          <span className="text-[14px] font-normal leading-[15.4px] text-[#636270]">
-            Contact:
-          </span>
-          <span className="text-[14px] font-medium leading-[15.4px] text-[#272343]">
+        {/* Right Contact Section */}
+        <div className="flex items-center gap-2">
+          <span className="text-[14px] text-[#636270]">Contact:</span>
+          <span className="text-[14px] font-medium text-[#272343]">
             (808) 555-0111
           </span>
         </div>

@@ -6,6 +6,7 @@ import Category from "./category";
 import Explore from "./explore";
 import OurProducts from "./ourProduct";
 
+
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -22,6 +23,7 @@ export default function Home() {
       <Category />
       <Explore />
       <OurProducts />
+      
     </main>
   );
 }

@@ -4,7 +4,7 @@ import React from "react";
 const HeroSection = () => {
   return (
     <section className="px-4 sm:px-8 md:px-16 lg:px-32 mx-auto">
-      <div className="bg-slate-200 text-black flex flex-col md:flex-row justify-around items-center mx-auto h-auto md:h-[550px] overflow-hidden py-8 sm:py-12 md:py-16">
+      <div className="bg-slate-200 text-black flex flex-col md:flex-row justify-around items-center mx-auto h-auto md:h-[400px] overflow-hidden py-8 sm:py-12 md:py-16">
         {/* Left Content */}
         <div className="w-full md:w-1/2 flex flex-col gap-3 justify-center items-center md:items-start px-4 md:px-8 text-center md:text-left mb-6 md:mb-0">
           <h1 className="text-1xl sm:text-1xl md:text-1xl lg:text-2xl font-medium mb-2">
@@ -23,8 +23,8 @@ const HeroSection = () => {
           <Image
             src="/Product Image.png"
             alt="Chair"
-            width={400}
-            height={400}
+            width={300}
+            height={300}
             className="w-full max-w-[230px] md:max-w-lg md:h-96 lg:max-w-[500px] lg:h-[400px] object-contain"
           />
         </div>

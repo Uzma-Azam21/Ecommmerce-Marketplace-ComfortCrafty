@@ -98,7 +98,25 @@ export default function Navbar() {
           <Link href="/" className="text-[14px] font-medium text-[#007580]">
             Home
           </Link>
-          {/* Add other links similarly */}
+          <Link href="/About" className="text-[14px] font-medium text-[#007580]">
+            About
+          </Link>
+          <Link href="/Products" className="text-[14px] font-medium text-[#007580]">
+            Products
+          </Link>
+          <Link href="/Shop" className="text-[14px] font-medium text-[#007580]">
+            Shop
+          </Link>
+          <Link href="/Cart" className="text-[14px] font-medium text-[#007580]">
+            Cart
+          </Link>
+          <Link href="/FAQ" className="text-[14px] font-medium text-[#007580]">
+            FAQ
+          </Link>
+          <Link href="/Contact" className="text-[14px] font-medium text-[#007580]">
+            Contact
+          </Link>
+          
         </div>
 
         {/* Right Contact Section */}

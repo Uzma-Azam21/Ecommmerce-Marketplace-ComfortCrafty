@@ -12,7 +12,7 @@ export default function Footer() {
             {/* Logo and Company Name */}
             <div className="flex items-center gap-2 w-[168px] h-[40px]">
               <Image
-                src="/Logo icon.svg"
+                src="/Logo icon.png"
                 alt="Comforty Logo"
                 width={40}
                 height={40}

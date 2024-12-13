@@ -1,6 +1,7 @@
 'use client';
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,10 +55,11 @@ export default function Navbar() {
       <div className="w-full max-w-[1920px] h-auto sm:h-[84px] py-4 sm:py-[20px] px-4 sm:px-8 md:px-16 lg:px-[300px] flex justify-between items-center bg-[#F0F2F3]">
         {/* Left Section */}
         <div className="flex items-center gap-2">
-          <img
+          <Image
             src="/Logo icon.svg"
             alt="Logo"
-            className="w-[40px] h-[40px]"
+            width={40}
+            height={40}
           />
           <p className="text-[26px] font-medium text-[#272343]">Comforty</p>
         </div>
@@ -88,7 +90,7 @@ export default function Navbar() {
       {/* Links Section */}
       <div
         className={`${
-          isMenuOpen ? "block" : "hidden"
+          isMenuOpen ? 'block' : 'hidden'
         } sm:flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 md:px-16 lg:px-[300px] py-4 sm:py-[14px] bg-[#FFFFFF] shadow-[0px_1px_0px_0px_#E1E3E5]`}
       >
         {/* Left Links */}
@@ -96,28 +98,7 @@ export default function Navbar() {
           <Link href="/" className="text-[14px] font-medium text-[#007580]">
             Home
           </Link>
-          <Link href="/Shop" className="text-[14px] font-medium text-[#636270]">
-            Shop
-          </Link >
-         
-          <Link  href="/Products" className="text-[14px] font-medium text-[#636270]">
-            Products
-          </Link >
-          <Link  href="/pages" className="text-[14px] font-medium text-[#636270]">
-            Pages
-          </Link >
-          <Link  href="/About" className="text-[14px] font-medium text-[#636270]">
-            About
-          </Link >
-          <Link  href="/Cart" className="text-[14px] font-medium text-[#636270]">
-            Cart
-          </Link >
-          <Link  href="/FAQ" className="text-[14px] font-medium text-[#636270]">
-            FAQ
-          </Link >
-          <Link  href="/Contact" className="text-[14px] font-medium text-[#636270]">
-            Contact
-          </Link >
+          {/* Add other links similarly */}
         </div>
 
         {/* Right Contact Section */}

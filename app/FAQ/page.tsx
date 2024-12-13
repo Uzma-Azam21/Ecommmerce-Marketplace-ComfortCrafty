@@ -8,6 +8,7 @@ interface FAQItem {
   answer: string
 }
 
+
 const faqData: FAQItem[] = [
   {
     question: "What types of chairs do you offer?",
@@ -33,7 +34,7 @@ const faqData: FAQItem[] = [
     question: "How do I clean and maintain my Comforty chair?",
     answer: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quis modi ullam amet debitis libero veritatis enim repellat optio natus eum delectus deserunt, odit expedita eos molestiae ipsa totam quidem?"
   }
-]
+];
 
 const FAQItem = ({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boolean; onToggle: () => void }) => (
   <div className="bg-[#EFEFEF] p-6 w-full rounded-lg mb-6 text-left shadow-md transition-all duration-300 ease-in-out">
@@ -71,7 +72,7 @@ export default function Faqs() {
 
       <p className="text-base font-normal mb-8 text-[#4F4F4F] max-w-2xl mx-auto">
         Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text.
+        industry. Lorem Ipsum has been the industry&#39s standard dummy text.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 mb-24">

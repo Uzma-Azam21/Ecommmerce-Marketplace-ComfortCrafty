@@ -42,7 +42,7 @@ export default function Footer() {
                   />
                 </svg>
               </Link>
-              {/* Add similar structure for other social media icons */}
+
               <Link href="#" className="hover:opacity-80 transition-opacity">
                 <svg className="w-5 h-5 text-[#272343]" viewBox="0 0 512 512">
                   <path
@@ -177,23 +177,15 @@ export default function Footer() {
                 tincidunt erat enim.
               </p>
             </div>
-<div className="mt-4 flex justify-center space-x-4">
-<FaCcMastercard size={40} />
-<FaPaypal size={40} />
-<FaCcAmex size={40} />
-<FaCcVisa size={40} />
-</div>
-           </div>
-         </div>
+            <div className="mt-4 flex justify-center space-x-4">
+              <FaCcMastercard size={40} />
+              <FaPaypal size={40} />
+              <FaCcAmex size={40} />
+              <FaCcVisa size={40} />
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );
- }
-
-
-
-
-
-
-
-
+}

@@ -4,8 +4,15 @@ import React from "react";
 export default function Explore() {
   return (
     <div className="flex flex-wrap px-4 sm:px-8 md:px-44 -mx-2 mt-12">
-      {/* Left Side Single Image */}
-      <div className="w-full md:w-1/2 p-2 flex flex-row justify-center items-center">
+      {/* Left Side Single Image with Text */}
+      <div className="w-full md:w-1/2 p-2 flex justify-center items-center relative">
+        {/* Vertical Text */}
+
+        {/* <div className="relative">
+   <div className="absolute top-[50%] left-0 -translate-y-1/2 rotate-90 text-gray-700 font-roboto text-lg tracking-wide z-10">
+       EXPLORE NEW AND POPULAR STYLES
+   </div> */}
+
         <div className="w-full h-full relative">
           <Image
             src="/p3.png"

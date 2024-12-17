@@ -31,7 +31,9 @@ const FeaturedProducts = () => {
             {/* Product Details (Name and Price) */}
             <div className="flex justify-between w-full px-4 py-2">
               <div className="flex flex-col items-start">
-                <h2 className="font-medium text-lg mb-1">Library Stone Chair</h2>
+                <h2 className="font-medium text-lg mb-1">
+                  Library Stone Chair
+                </h2>
                 <span className="text-black text-lg font-bold">$20</span>
               </div>
               <div className="flex items-center">

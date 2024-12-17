@@ -12,6 +12,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+        helvetica: ['Helvetica', 'Arial', 'sans-serif'],
+      },
       screens: {
         'xs': '480px',     // Mobile Small
         'sm': '481px',     // Mobile Large

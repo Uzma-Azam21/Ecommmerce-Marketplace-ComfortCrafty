@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
 interface CategoryProps {
   image: string;
@@ -10,19 +10,19 @@ interface CategoryProps {
 export default function Category() {
   const categories: CategoryProps[] = [
     {
-      image: '/c1.png',
-      name: 'Wing Chair',
-      productCount: '3584',
+      image: "/c1.png",
+      name: "Wing Chair",
+      productCount: "3584",
     },
     {
-      image: '/c2.png',
-      name: 'Wooden Chair',
-      productCount: '157',
+      image: "/c2.png",
+      name: "Wooden Chair",
+      productCount: "157",
     },
     {
-      image: '/c3.png',
-      name: 'Desk Chair',
-      productCount: '154',
+      image: "/c3.png",
+      name: "Desk Chair",
+      productCount: "154",
     },
   ];
 
@@ -34,14 +34,14 @@ export default function Category() {
           <div
             key={index}
             className="relative group rounded-lg overflow-hidden shadow-md hover:shadow-xl transform transition duration-300"
-            style={{ height: '300px', position: 'relative' }}
+            style={{ height: "300px", position: "relative" }}
           >
             {/* Image Section */}
             <Image
               src={category.image}
               alt={category.name}
-              fill 
-              style={{ objectFit: 'cover' }} 
+              fill
+              style={{ objectFit: "cover" }}
               className="rounded-t-lg"
             />
 
@@ -64,5 +64,3 @@ export default function Category() {
     </div>
   );
 }
-
-

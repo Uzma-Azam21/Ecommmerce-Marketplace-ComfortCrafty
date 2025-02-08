@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Poppins } from "next/font/google";
 import { FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import { GoClockFill, GoVerified } from "react-icons/go";
@@ -52,41 +53,34 @@ const Feature = ({ icon, title, subtitle }: FeatureProps) => (
   </div>
 );
 
-const InputField = ({
-  label,
-  type = "text",
-  placeholder,
-  required = false,
-}: {
-  label: string;
-  type?: string;
-  placeholder: string;
-  required?: boolean;
-}) => (
-  <div className="mb-8">
-    <label
-      className={`${poppins.className} text-base md:text-lg font-medium block mb-5`}
-    >
-      {label}
-    </label>
-    {type === "textarea" ? (
-      <textarea
-        placeholder={placeholder}
-        required={required}
-        className="w-full h-32 p-6 border border-[#9F9F9F] rounded-lg resize-none"
-      />
-    ) : (
-      <input
-        type={type}
-        placeholder={placeholder}
-        required={required}
-        className="w-full h-[75px] p-6 border border-[#9F9F9F] rounded-lg"
-      />
-    )}
-  </div>
-);
-
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [notification, setNotification] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Simulate form submission
+    setTimeout(() => {
+      setNotification(
+        "Your message has been received. We will contact you soon!"
+      );
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setNotification(""), 5000); // Clear notification after 5 sec
+    }, 1000);
+  };
+
   const contactInfo = [
     {
       icon: <FaMapMarkerAlt size={28} />,
@@ -146,21 +140,79 @@ export default function ContactPage() {
         </div>
 
         <div className="p-8 w-full max-w-2xl">
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
-            <InputField label="Your name" placeholder="Abc" required />
-            <InputField
-              label="Email address"
-              type="email"
-              placeholder="Abc@def.com"
-              required
-            />
-            <InputField label="Subject" placeholder="This is an optional" />
-            <InputField
-              label="Message"
-              type="textarea"
-              placeholder="Hi! I'd like to ask about"
-              required
-            />
+          {notification && (
+            <div className="mb-4 p-4 bg-green-100 text-green-700 rounded-lg">
+              {notification}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-2">
+            <div className="mb-8">
+              <label
+                className={`${poppins.className} text-base md:text-lg font-medium block mb-5`}
+              >
+                Your Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Abc"
+                required
+                className="w-full h-[75px] p-6 border border-[#9F9F9F] rounded-lg"
+              />
+            </div>
+
+            <div className="mb-8">
+              <label
+                className={`${poppins.className} text-base md:text-lg font-medium block mb-5`}
+              >
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Abc@def.com"
+                required
+                className="w-full h-[75px] p-6 border border-[#9F9F9F] rounded-lg"
+              />
+            </div>
+
+            <div className="mb-8">
+              <label
+                className={`${poppins.className} text-base md:text-lg font-medium block mb-5`}
+              >
+                Subject (Optional)
+              </label>
+              <input
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder="This is an optional"
+                className="w-full h-[75px] p-6 border border-[#9F9F9F] rounded-lg"
+              />
+            </div>
+
+            <div className="mb-8">
+              <label
+                className={`${poppins.className} text-base md:text-lg font-medium block mb-5`}
+              >
+                Message
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Hi! I'd like to ask about..."
+                required
+                className="w-full h-32 p-6 border border-[#9F9F9F] rounded-lg resize-none"
+              />
+            </div>
+
             <button
               type="submit"
               className="w-full md:w-60 h-14 bg-[#029FAE] border border-[#B88E2F] rounded text-white transition-colors hover:bg-[#028694]"

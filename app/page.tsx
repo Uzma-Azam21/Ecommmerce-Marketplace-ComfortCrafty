@@ -1,29 +1,17 @@
-import React from "react";
-import HeroSection from "./HeroSection";
+import HeroSection from "./components/HeroSection";
+import FeaturedProducts from "./components/FeaturedProducts";
+import CategoryList from "./components/CategoryList";
 import CompanyLogo from "./CompanyLogo";
-import FeaturedProducts from "./featureProduct";
-import Category from "./category";
-import Explore from "./explore";
-import OurProducts from "./ourProduct";
-
+import Explore from "./Explore";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      {/* Hero Section */}
+    <div>
       <HeroSection />
-
-      {/* Company Logo Section */}
       <CompanyLogo />
-
-      {/* Featured Products Section */}
       <FeaturedProducts />
-
-      {/* Other Sections */}
-      <Category />
+      <CategoryList />
       <Explore />
-      <OurProducts />
-      
-    </main>
+    </div>
   );
 }

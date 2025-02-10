@@ -5,10 +5,26 @@ import { useWishlistStore } from "../../store/wishlistStore";
 import { fetchProductById } from "../../../sanity/lib/fetchProductById";
 import Image from "next/image";
 
+interface Product {
+  _id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  badge?: string;
+  inventory: number;
+  priceWithoutDiscount?: number;
+  description: string;
+  dimensions?: {
+    height: number;
+    width: number;
+    depth: number;
+  };
+}
+
 export default function ProductPage({ params }: { params: { id: string } }) {
   const { addToCart } = useCartStore();
   const { addToWishlist } = useWishlistStore();
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -25,13 +41,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   // Calculate Discount Price
   const discountAmount =
-    product.badge === "Sales"
+    product.badge === "Sales" && product.priceWithoutDiscount
       ? product.priceWithoutDiscount - product.price
       : 0;
-  const finalPrice =
-    product.badge === "Sales"
-      ? product.price
-      : product.priceWithoutDiscount || product.price;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -84,8 +96,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           {product.dimensions && (
             <p className="text-gray-600 mt-2">
               <span className="font-semibold">Dimensions:</span>
-              {product.dimensions.height}" H × {product.dimensions.width}" W ×{" "}
-              {product.dimensions.depth}" D
+              {product.dimensions.height}&quot; H × {product.dimensions.width}
+              &quot; W × {product.dimensions.depth}&quot; D
             </p>
           )}
 
@@ -113,7 +125,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
           {/*  Add to Cart Button */}
           <button
-            onClick={() => addToCart({ ...product, quantity })}
+            onClick={() =>
+              addToCart({
+                ...product,
+                quantity,
+                totalPrice: product.price * quantity,
+              })
+            }
             className="mt-4 px-6 py-2 bg-green-600 text-white rounded-md"
           >
             Add to Cart

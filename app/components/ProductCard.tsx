@@ -11,11 +11,11 @@ interface Product {
   imageUrl: string;
   badge?: string;
   inventory: number;
-  priceWithoutDiscount?: number; //  Original price (for sales)
+  priceWithoutDiscount?: number;
 }
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { addToCart } = useCartStore();
+  useCartStore();
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-gray-400 transform transition-transform duration-300">

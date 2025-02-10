@@ -75,16 +75,16 @@ export default function About() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto slide effect
+  // Auto slide effect with dependency fix
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // Auto-slide every 3 seconds
+    }, 3000);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, []);
+  }, [images.length]); // ✅ Fix: Missing dependency added
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);

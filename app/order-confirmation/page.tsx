@@ -1,10 +1,33 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { FaCheckCircle, FaTruck, FaHome, FaShoppingBag } from "react-icons/fa";
 
+interface OrderDetails {
+  total: number;
+  paymentMethod: string;
+  deliveryDate: string;
+  address: {
+    street: string;
+    city: string;
+    country: string;
+  };
+  contactInfo: {
+    email: string;
+    phone: string;
+  };
+  cart: {
+    _id: string;
+    imageUrl: string;
+    title: string;
+    quantity: number;
+    price: number;
+  }[];
+}
+
 const OrderConfirmation = () => {
-  const [orderDetails, setOrderDetails] = useState<any>(null);
+  const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
   const [deliveryCharge, setDeliveryCharge] = useState(0);
 
   useEffect(() => {
@@ -66,7 +89,9 @@ const OrderConfirmation = () => {
             </p>
             <p>
               <strong>Delivery Charges:</strong>{" "}
-              {deliveryCharge > 0 ? `$${deliveryCharge.toFixed(2)}` : "FREE &#128666;"}
+              {deliveryCharge > 0
+                ? `$${deliveryCharge.toFixed(2)}`
+                : "FREE &#128666;"}
             </p>
             <p className="text-lg font-bold">
               <strong>Final Total:</strong> ${finalTotal.toFixed(2)}
@@ -95,12 +120,14 @@ const OrderConfirmation = () => {
             <FaShoppingBag /> Ordered Products
           </h2>
           <div className="space-y-4">
-            {orderDetails.cart.map((item: any) => (
+            {orderDetails.cart.map((item) => (
               <div key={item._id} className="flex items-center border-b pb-4">
-                <img
+                <Image
                   src={item.imageUrl}
                   alt={item.title}
-                  className="h-16 w-16 rounded-lg object-cover"
+                  width={64}
+                  height={64}
+                  className="rounded-lg object-cover"
                 />
                 <div className="ml-4">
                   <p className="text-md font-medium">{item.title}</p>

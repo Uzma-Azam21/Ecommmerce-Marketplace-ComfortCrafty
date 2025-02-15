@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaCheckCircle, FaTruck, FaHome, FaShoppingBag } from "react-icons/fa";
-
+import { useCartStore } from "../store/cartStore"; 
 interface OrderDetails {
   total: number;
   paymentMethod: string;
@@ -29,7 +29,7 @@ interface OrderDetails {
 const OrderConfirmation = () => {
   const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
   const [deliveryCharge, setDeliveryCharge] = useState(0);
-
+  const clearCart = useCartStore((state) => state.clearCart);
   useEffect(() => {
     const details = localStorage.getItem("orderDetails");
     if (details) {
@@ -45,7 +45,8 @@ const OrderConfirmation = () => {
       }
       setDeliveryCharge(charge);
     }
-  }, []);
+    clearCart();
+  }, [clearCart]);
 
   if (!orderDetails) {
     return (
@@ -158,3 +159,9 @@ const OrderConfirmation = () => {
 };
 
 export default OrderConfirmation;
+
+
+
+
+
+

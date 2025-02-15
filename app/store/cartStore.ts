@@ -1,5 +1,6 @@
 "use client";
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface Product {
   _id: string;
@@ -33,74 +34,87 @@ interface CartStore {
   }; // Return full billing details
 }
 
-export const useCartStore = create<CartStore>((set, get) => ({
-  cart: [],
+export const useCartStore = create<CartStore>()(
+  persist(
+    (set, get) => ({
+      cart: [],
 
-  addToCart: (item) =>
-    set((state) => {
-      const existingItem = state.cart.find(
-        (cartItem) => cartItem._id === item._id
-      );
-      const discountPrice =
-        item.badge === "Sales"
-          ? item.price
-          : item.priceWithoutDiscount || item.price;
+      addToCart: (item) =>
+        set((state) => {
+          const existingItem = state.cart.find(
+            (cartItem) => cartItem._id === item._id
+          );
+          const discountPrice =
+            item.badge === "Sales"
+              ? item.price
+              : item.priceWithoutDiscount || item.price;
 
-      if (existingItem) {
-        return {
-          cart: state.cart.map((cartItem) =>
-            cartItem._id === item._id
+          if (existingItem) {
+            return {
+              cart: state.cart.map((cartItem) =>
+                cartItem._id === item._id
+                  ? {
+                      ...cartItem,
+                      quantity: cartItem.quantity + item.quantity,
+                      totalPrice:
+                        (cartItem.quantity + item.quantity) * discountPrice, // Update total price per product
+                    }
+                  : cartItem
+              ),
+            };
+          } else {
+            return {
+              cart: [
+                ...state.cart,
+                { ...item, totalPrice: item.quantity * discountPrice },
+              ],
+            };
+          }
+        }),
+
+      updateQuantity: (id, quantity) =>
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item._id === id
               ? {
-                  ...cartItem,
-                  quantity: cartItem.quantity + item.quantity,
+                  ...item,
+                  quantity,
                   totalPrice:
-                    (cartItem.quantity + item.quantity) * discountPrice, // Update total price per product
+                    quantity *
+                    (item.badge === "Sales"
+                      ? item.price
+                      : item.priceWithoutDiscount || item.price), // Update dynamically
                 }
-              : cartItem
+              : item
           ),
-        };
-      } else {
-        return {
-          cart: [
-            ...state.cart,
-            { ...item, totalPrice: item.quantity * discountPrice },
-          ],
-        };
-      }
+        })),
+
+      removeFromCart: (id) =>
+        set((state) => ({
+          cart: state.cart.filter((item) => item._id !== id),
+        })),
+      clearCart: () => set({ cart: [] }),
+
+      //  New: Get full billing details
+      getTotal: () => {
+        const subtotal = get().cart.reduce(
+          (acc, item) =>
+            acc + item.quantity * (item.priceWithoutDiscount || item.price),
+          0
+        );
+        const total = get().cart.reduce(
+          (acc, item) => acc + item.totalPrice,
+          0
+        );
+        const savings = subtotal - total;
+        const discount = savings > 0 ? savings : 0;
+
+        return { subtotal, discount, total, savings };
+      },
     }),
-
-  updateQuantity: (id, quantity) =>
-    set((state) => ({
-      cart: state.cart.map((item) =>
-        item._id === id
-          ? {
-              ...item,
-              quantity,
-              totalPrice:
-                quantity *
-                (item.badge === "Sales"
-                  ? item.price
-                  : item.priceWithoutDiscount || item.price), // Update dynamically
-            }
-          : item
-      ),
-    })),
-
-  removeFromCart: (id) =>
-    set((state) => ({ cart: state.cart.filter((item) => item._id !== id) })),
-  clearCart: () => set({ cart: [] }),
-
-  //  New: Get full billing details
-  getTotal: () => {
-    const subtotal = get().cart.reduce(
-      (acc, item) =>
-        acc + item.quantity * (item.priceWithoutDiscount || item.price),
-      0
-    );
-    const total = get().cart.reduce((acc, item) => acc + item.totalPrice, 0);
-    const savings = subtotal - total;
-    const discount = savings > 0 ? savings : 0;
-
-    return { subtotal, discount, total, savings };
-  },
-}));
+    {
+      name: "cart-storage",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
